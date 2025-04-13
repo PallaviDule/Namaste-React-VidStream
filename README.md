@@ -18,5 +18,10 @@ This repository documents my learning journey through the **Namaste React** cour
 3. [Styling: CSS & Tailwind](doc/Styling.md)
 4. [Errors and Fixes](doc/ErrorsAndFixes.md)
 
+
+### Important Links
+1. [Google API Links](https://developers.google.com/workspace/cloud-search/docs/reference/rest) - used these in search field
+2. [YouTube API Links](https://developers.google.com/youtube/v3/docs) - used these api to get video details.
+
 --- 
 **⭐️ If you find this helpful or are also taking the course, feel free to star the repo and connect!**

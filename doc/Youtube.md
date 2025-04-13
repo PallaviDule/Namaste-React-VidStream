@@ -8,3 +8,10 @@
     - Open credentials Page -> credentials(You may not see blank page here with a option to create a project)
     - You need to `create a project`(dummy) to get credentials. 
     - Click on `create credentials`
+- Even when I got my API keys, I was getting 403.
+    - You need to enable the project to access the api.
+    - You should get more details in error itself and also the link which redirects you to the page where you can enable the project.
+    - Try again, you should be able to get the result
+- You should get by default 5items, to load more items we have used `MaxResult=50`. 
+    - [Videos List](https://developers.google.com/youtube/v3/docs/videos/list)
+- In the api url, by default they are using US region. For indian region, I am using in region.

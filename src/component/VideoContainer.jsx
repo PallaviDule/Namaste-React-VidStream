@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { YOUTUBE_MOST_POPULAR_URL } from '../utils/constants';
+import VideoCard from './VideoCard';
+import { Link } from 'react-router-dom';
 
 const VideoContainer = () => {
+  const [videos, setVideos] = useState('');
+  
   useEffect(() => {
     fetchVideos();
   }, []);
@@ -10,11 +14,17 @@ const VideoContainer = () => {
     const data = await fetch(YOUTUBE_MOST_POPULAR_URL);
     const response = await data.json();
 
-    console.log('response:', response);
+    setVideos(response.items);
   };
 
   return (
-    <div>VideoContainer</div>
+    <div className='grid grid-cols-4 m-1'>
+      { videos.length && videos.map((info) =>
+        <Link to={`/watch?v=${info.id}`} key={info.id}>
+          <VideoCard info={info}/>
+        </Link>
+      )}
+    </div>
   )
 }
 
