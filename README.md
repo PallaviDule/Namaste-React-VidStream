@@ -19,5 +19,4 @@ This repository documents my learning journey through the **Namaste React** cour
 4. [Errors and Fixes](doc/ErrorsAndFixes.md)
 
 --- 
-
-#### ⭐️ If you find this helpful or are also taking the course, feel free to star the repo and connect!
+**⭐️ If you find this helpful or are also taking the course, feel free to star the repo and connect!**
