@@ -1,0 +1,10 @@
+.headerContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* tailwind: grid grid-cols-3 grid-flow-col*/
+    grid-auto-flow: column;
+}
+
+.firstBlock {
+    display: flex;
+    grid-column: span 1 / span 1;
+}
