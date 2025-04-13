@@ -10,8 +10,7 @@ const Header = () => {
         dispatch(toggleMenu());
     };
   return (
-    // <div className='grid grid-cols-3 gap-4'>
-    <div className='headerContainer p-2 m-2 shadow-2xl shadow-gray-300'>
+    <div className='headerContainer p-2 m-2 '>
         <div className='firstBlock'>
             <img 
                 className='h-8 p-1 mx-1'

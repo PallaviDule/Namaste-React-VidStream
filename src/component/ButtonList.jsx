@@ -5,9 +5,9 @@ const ButtonArrayList = ['All', 'Music', 'News', 'Game Shows', 'Indian Music', '
 
 const ButtonList = () => {
   return (
-    <div className='flex'>
+    <div className='flex p-1'>
       {ButtonArrayList.map((button) => 
-        <Button name={button}/>
+        <Button name={button} key={button}/>
       )}
     </div>
   )
