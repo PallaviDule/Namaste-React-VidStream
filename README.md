@@ -17,6 +17,7 @@ This repository documents my learning journey through the **Namaste React** cour
 2. [YouTube Api Setup](doc/Youtube.md)
 3. [Styling: CSS & Tailwind](doc/Styling.md)
 4. [Errors and Fixes](doc/ErrorsAndFixes.md)
+5. [Cache](doc/Cache.md)
 
 
 ### Important Links
