@@ -1,3 +1,6 @@
 const YOUTUBE_API_KEY = 'AIzaSyDgBCAE-cJAL4s_d6Fg07JJ1wX6hQUtUis';
 export const YOUTUBE_MOST_POPULAR_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=in&key=${YOUTUBE_API_KEY}`;
 export const VIDEO_DETAILS_BY_ID = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=${YOUTUBE_API_KEY}&id=`
+export const SEARCH_SUGGESTION_URL = `http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=`;
+
+ 

@@ -20,7 +20,7 @@ This repository documents my learning journey through the **Namaste React** cour
 
 
 ### Important Links
-1. [Google API Links](https://developers.google.com/workspace/cloud-search/docs/reference/rest) - used these in search field
+1. [Google API Links](https://developers.google.com/workspace/cloud-search/docs/reference/rest)
 2. [YouTube API Links](https://developers.google.com/youtube/v3/docs) - used these api to get video details.
 
 --- 

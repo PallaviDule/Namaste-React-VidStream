@@ -16,3 +16,6 @@ Currently, two official plugins are available:
     - We read pathParam using useParams();
     - We read searchParam using [useSearchParams](https://reactrouter.com/6.30.0/hooks/use-search-params).
         - In this project, in [watchPage](../src/component/WatchPage.jsx)
+
+### Custom Hooks
+- [useYouTubeSuggest](../src/utils/useYouTubeSuggest.jsx) : We created this custom hook, as we have to make a api call as well as some logic. So, it was better to move it altogether as a new hook rather than using useEffect in the same file. It might make project complicted, un-readable.
