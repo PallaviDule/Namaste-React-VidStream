@@ -1,16 +1,27 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { useDispatch } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
+import { SEARCH_SUGGESTION_URL } from '../utils/constants';
+import useYouTubeSuggest from '../utils/useYouTubeSuggest';
 
 const Header = () => {
     const dispatch = useDispatch();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     const toggleMenuHeader = () => {
         dispatch(toggleMenu());
     };
-  return (
-    <div className='headerContainer p-2 m-2 '>
+
+    const { suggestions, loading, error } = useYouTubeSuggest(searchQuery);
+
+    console.log('sug:', suggestions);
+
+
+    return (
+    <div className='headerContainer p-2 m-2 bg-white'>
         <div className='firstBlock'>
             <img 
                 className='h-8 p-1 mx-1'
@@ -24,19 +35,36 @@ const Header = () => {
                 alt='youtube-icon' 
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/2560px-Logo_of_YouTube_%282015-2017%29.svg.png'/>
         </div>
-
-        <div className='flex col-span-10'>
-            <div className='flex col-span-10'>
-                <input className='border-1 border-gray-400 rounded-l-3xl text-center w-120 h-8'type='text' placeholder='Search'/>
-                <button className='border-1 border-gray-400 rounded-r-3xl w-20 h-8'>🔍</button>
-            </div>
-            <img 
-                className='h-8 px-3'
+        <div className='col-span-10'>
+            <div className='col-span-10 flex'>
+                <input className='border-1 border-gray-400 rounded-l-3xl px-4 w-120 h-10'
+                    type='text' 
+                    placeholder='🔍  Search' 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={()=> setShowSuggestions(true)}
+                    onBlur={() => setShowSuggestions(false)}
+                />
+                <button className='border-1 border-gray-400 rounded-r-3xl w-20 h-10'>🔍</button>
+                <img 
+                className='h-10 p-2'
                 alt='voice-icon' 
                 src='data:image/jpeg;base64,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'/>
+            </div>
+            {(suggestions.length > 0 && searchQuery && showSuggestions)&& 
+                <div className='fixed my-2 mx-1  border border-gray-100 rounded-2xl col-span-10 p-2 w-120 bg-white shadow-md shadow-gray-400'>
+                    <ul>
+                        {suggestions.map((suggestion) => 
+                            <li className='hover:bg-gray-100' key={suggestion}> 🔍 
+                                <span className='p-2 m-1'>{suggestion}</span>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            }
         </div>
         <div className='flex col-span-1'>
-            <button className='bg-gray-200 rounded-2xl w-20'>＋Create</button>
+            <button className='bg-gray-200 rounded-2xl w-20 px-2'>＋Create</button>
             <img 
                 className='h-8'
                 alt='bell-icon' 
