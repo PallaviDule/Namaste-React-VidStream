@@ -17,9 +17,6 @@ const Header = () => {
 
     const { suggestions, loading, error } = useYouTubeSuggest(searchQuery);
 
-    console.log('sug:', suggestions);
-
-
     return (
     <div className='headerContainer p-2 m-2 bg-white'>
         <div className='firstBlock'>
