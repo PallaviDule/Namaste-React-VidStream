@@ -11,6 +11,10 @@ This repository documents my learning journey through the **Namaste React** cour
 3. Start developement sever:`npm run start`
 4. The app will be available at `http://localhost:5173/`
 
+### What you would learn in this Project
+1. Setup of React+Vite
+2. Tailwind CSS
+3. Caching (LRU caching)
 
 ### My Learning Doc 
 1. [React+Vite Setup](doc/React+Vite.md)
