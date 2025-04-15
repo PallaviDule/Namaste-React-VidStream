@@ -23,7 +23,6 @@ const useYouTubeSuggest = (query) => {
 
     if(suggestionCache.has(query)) {
       const searchCache = suggestionCache.get(query);
-      console.log('cache has the query', searchCache);
       setSuggestions(searchCache[query]);
       setLoading(false);
       return;

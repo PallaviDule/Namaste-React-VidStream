@@ -6,7 +6,6 @@ import { VIDEO_DETAILS_BY_ID } from '../utils/constants';
 
 const VideoDetails = ({details}) => {
     const {snippet, statistics} = details;
-    console.log('details:', details);
     return (
         <div>
         <div className='font-bold text-lg'>{snippet.title}</div>
