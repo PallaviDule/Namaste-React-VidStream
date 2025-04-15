@@ -1,17 +1,34 @@
 import { useState, useEffect } from 'react';
 import { SEARCH_SUGGESTION_URL } from './constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { searchCacheResult } from './searchSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { searchCacheResult } from './searchSlice';
+import {createLRUCache} from './createlruCache'; 
+
+const suggestionCache = createLRUCache(5);
 
 const useYouTubeSuggest = (query) => {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const {searchCache} = useSelector((store) => store.search);
-  const dispatch = useDispatch();
+  //  const {searchCache} = useSelector((store) => store.search); // before we cached search in store
+  // const dispatch = useDispatch();   
+  // if(searchCache[query]) {
+  //   setSuggestions(searchCache[query]);
+  //   setLoading(false);
+  //   return;
+  // }
 
   useEffect(() => {
     if (!query) return;
+
+    if(suggestionCache.has(query)) {
+      const searchCache = suggestionCache.get(query);
+      console.log('cache has the query', searchCache);
+      setSuggestions(searchCache[query]);
+      setLoading(false);
+      return;
+    }
+  
     const getYouTubeSuggestions = async () => {
       setLoading(true);
       try {
@@ -34,7 +51,8 @@ const useYouTubeSuggest = (query) => {
 
         const formattedSuggestions = result[1].map(item => item[0]);
         setSuggestions(formattedSuggestions);
-        dispatch(searchCacheResult({[query]: formattedSuggestions}));
+       // dispatch(searchCacheResult({[query]: formattedSuggestions}));
+        suggestionCache.set(query, formattedSuggestions)
       } catch (err) {
         setError('Error fetching suggestions');
       } finally {
@@ -43,13 +61,7 @@ const useYouTubeSuggest = (query) => {
     };
 
     const timer = setTimeout(() => {
-      console.log('searchCache[query]', searchCache[query], ' and query:', query);
-      if(searchCache[query]) {
-        setSuggestions(searchCache[query]);
-        console.log('suggestion:', suggestions);
-      } else {
         getYouTubeSuggestions()
-      }
     }, 500);
 
     return () => {
