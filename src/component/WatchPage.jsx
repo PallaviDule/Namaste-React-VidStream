@@ -3,18 +3,31 @@ import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { closeMenu } from '../utils/appSlice';
 import { VIDEO_DETAILS_BY_ID } from '../utils/constants';
+import CommentContainer from './CommentContainer';
+
+const ShowDescriptionBox = ({description}) => {
+    return (
+        <p>{description}</p>
+    )
+}
 
 const VideoDetails = ({details}) => {
     const {snippet, statistics} = details;
+
     return (
         <div>
-        <div className='font-bold text-lg'>{snippet.title}</div>
-        <div className='font-bold'>{snippet.channelTitle}</div>
-        <div className='text-gray-500 text-sm'>
-            {statistics.viewCount/1000}K views ̣ {statistics.publishedAt}
-        </div>
-    </div>
-    )
+            <div className='w-[800px]'>
+                <div className='font-bold text-lg'>{snippet.title}</div>
+                <div className='font-bold text-xs'>{snippet.channelTitle}</div>
+                <div className='text-gray-500 text-sm bg-gray-100 rounded-lg'>
+                    <div>
+                        {statistics.viewCount/1000}K views ̣ {statistics.publishedAt} 
+                    </div>
+                    <ShowDescriptionBox description={snippet.description} />
+                </div>
+            </div>
+            <CommentContainer commentCount={statistics.commentCount}/>
+        </div>)
 }
 
 const WatchPage = () => {

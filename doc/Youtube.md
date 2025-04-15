@@ -8,6 +8,7 @@
     - Open credentials Page -> credentials(You may not see blank page here with a option to create a project)
     - You need to `create a project`(dummy) to get credentials. 
     - Click on `create credentials`
+    - If credentials expires, regenerate again
 - Even when I got my API keys, I was getting 403.
     - You need to enable the project to access the api.
     - You should get more details in error itself and also the link which redirects you to the page where you can enable the project.
