@@ -1,22 +1,60 @@
 # Live Chat
-At a minimum, a live chat app involves:
+
+A basic live chat application involves:
+
 - Connecting users
 - Sending messages
 - Receiving messages in real-time
 - Displaying those messages in order
 
-### Tech Options for Live Chat
-To get real-time updates, you need something more dynamic than standard HTTP requests. You typically have 3 main options:
+### Real-Time Communication: Tech Options
 
-- WebSockets (Best for live chat)
-- Polling (Less efficient, but easier) 
-    - Youtube 
-        - Youtube does not store old messages after some limit. You won't see oldest messages.
-        - I checked how many messages where showing in live chat on youtube live page, it always gave 79-80 message count
-        - `document.getElementsByTagName('yt-live-chat-text-message-renderer').length`
+To achieve real-time message delivery, standard HTTP is usually not enough. The most common options are:
 
-- Server-Sent Events (One-way stream from server to client)
+#### 1. WebSockets
+- Best suited for real-time chat
+- Enables two-way communication between client and server
+- Used by most production chat apps
 
-### What we are doing in this project
-- We are using polling feature in this one, although we are not calling any third-party resources in this project, rather mockData.
-- [LiveChat Implementation](../src/component/LiveChat.jsx)
+#### 2. Polling
+- Less efficient than WebSockets, but easier to implement
+- The client sends repeated requests at intervals to check for new messages
+
+- #### YouTube Chat Behavior (Observed):
+    - YouTube uses polling for its live chat (not confirmed officially, but behavior matches polling).
+    - YouTube limits the number of visible messages:
+    - Messages older than a certain point are removed from the DOM.
+    - You can check this using:
+        ```js
+        document.getElementsByTagName('yt-live-chat-text-message-renderer').length
+        ```
+    - Typically, only 79–80 recent messages are shown at a time.
+
+#### 3. Server-Sent Events (SSE)
+- One-way stream: server pushes updates to the client
+- Simpler than WebSockets, but not as flexible
+
+
+
+### What We’re Using in This Project
+
+- We simulate live chat using **polling**, though we’re not fetching data from a real-time server.
+- Instead, we use mock data and Redux to mimic live updates.
+- This keeps the project frontend-only and suitable for learning and experimentation.
+- Auto-scroll to the latest message
+
+**View the implementation:**  [LiveChat.jsx](../src/component/LiveChat.jsx)
+
+
+### Notes
+
+- The chat input uses controlled components (`useState`) and Redux to dispatch messages.
+- New messages are added to the Redux store and rendered from there.
+- Polling or interval logic can be added later to simulate incoming messages from other users.
+
+
+### Possible Enhancements (For Practice)
+
+- Replace mock data with a WebSocket-based backend (e.g., using `socket.io`)
+- Add user avatars or timestamps
+- Persist messages in `localStorage` or a database
