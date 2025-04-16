@@ -16,3 +16,7 @@ To get real-time updates, you need something more dynamic than standard HTTP req
         - `document.getElementsByTagName('yt-live-chat-text-message-renderer').length`
 
 - Server-Sent Events (One-way stream from server to client)
+
+### What we are doing in this project
+- We are using polling feature in this one, although we are not calling any third-party resources in this project, rather mockData.
+- [LiveChat Implementation](../src/component/LiveChat.jsx)

@@ -13,7 +13,6 @@ const ReplyToChat = () => {
         onSendClick();
     };
     const onSendClick = () => {
-        console.log('Here in send click');
         dispatch(addMessage({name: 'Pallavi Dule', message: replyMessage}));
         setReplyMessage('');
     };
@@ -33,6 +32,7 @@ const ReplyToChat = () => {
             <button 
                 className='px-2 m-1 hover:shadow shadow-gray-700 rounded-full items-center'
                 onMouseDown={() => onSendClick()}
+                disabled={!replyMessage.trim()}
             >
                 <img
                     width={20}
