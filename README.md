@@ -4,40 +4,35 @@ This repository documents my learning journey through the **Namaste React** cour
 
 ### 🔧 Installation & Setup
 
-1. **Clone this repository**:
+1. clone this repository:
    ```bash
    git clone https://github.com/PallaviDule/Namaste-React-VidStream.git
    cd Namaste-React-VidStream
    ```
-
-2. **Install dependencies**:
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-3. **Start the development server**:
+3. Start the development server:
    ```bash
    npm run dev
    ```
-
 4. Open in browser:  
    [http://localhost:5173](http://localhost:5173)
 
 
 ### 📚 What You'll Learn from This Project
-
-✅ Vite + React setup  
-✅ Tailwind CSS styling  
-✅ Debounced YouTube search suggestions  
-✅ Custom LRU Caching logic (functional!)  
-✅ Live chat with Redux state  
-✅ Component communication via props/hooks  
-✅ Real-world React architecture + patterns  
+   - Vite + React setup  
+   - Tailwind CSS styling  
+   - Debounced YouTube search suggestions  
+   - Custom LRU Caching logic (functional!)  
+   - Live chat with Redux state  
+   - Component communication via props/hooks  
+   - Real-world React architecture + patterns  
 
 ### 🗂️ Learning Docs
 
 All of my personal notes and deep dives are in the `doc/` folder:
-
 1. 📦 [React + Vite Setup](doc/React+Vite.md)  
 2. 📡 [YouTube API Integration](doc/Youtube.md)  
 3. 🎨 [CSS & Tailwind Styling](doc/Styling.md)  
@@ -47,7 +42,6 @@ All of my personal notes and deep dives are in the `doc/` folder:
 
 
 ### 🔗 API References
-
 - [Google Workspace API](https://developers.google.com/workspace/cloud-search/docs/reference/rest)
 - [YouTube Data API v3](https://developers.google.com/youtube/v3/docs)
 
