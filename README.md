@@ -15,13 +15,16 @@ This repository documents my learning journey through the **Namaste React** cour
 1. Setup of React+Vite
 2. Tailwind CSS
 3. Caching (LRU caching)
+4. Search with Debouncing
+5. Live Chat (Web Socket)
 
 ### My Learning Doc 
 1. [React+Vite Setup](doc/React+Vite.md)
 2. [YouTube Api Setup](doc/Youtube.md)
 3. [Styling: CSS & Tailwind](doc/Styling.md)
 4. [Cache](doc/Cache.md)
-5. [Errors and Fixes](doc/ErrorsAndFixes.md)
+5. [Live Chat](doc/LiveChat.md)
+6. [Errors and Fixes](doc/ErrorsAndFixes.md)
 
 
 ### Important Links
