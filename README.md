@@ -1,32 +1,67 @@
-# Namaste-React-VidStream
-This repository documents my learning journey through the **Namaste React** course by Akshay Saini, while building a React-based video streaming application using modern tools like Vite, React Router, and TailwindCSS.
+# 📺 Namaste-React-VidStream
 
-### 🔩 Installation and Setup
-1. Clone this respository
-    ```bash
-    git clone https://github.com/PallaviDule/Namaste-React-VidStream.git
-    cd Namste-React-VidStream
-    ```
-2. Install dependencies: `npm install`
-3. Start developement sever:`npm run start`
-4. The app will be available at `http://localhost:5173/`
+This repository documents my learning journey through the **Namaste React** course by Akshay Saini. I’ve built a mini video streaming app using modern tools like **Vite**, **React Router**, **Redux Toolkit**, and **Tailwind CSS**.
 
-### What you would learn in this Project
-1. Setup of React+Vite
-2. Tailwind CSS
-3. Caching (LRU caching)
+### 🔧 Installation & Setup
 
-### My Learning Doc 
-1. [React+Vite Setup](doc/React+Vite.md)
-2. [YouTube Api Setup](doc/Youtube.md)
-3. [Styling: CSS & Tailwind](doc/Styling.md)
-4. [Cache](doc/Cache.md)
-5. [Errors and Fixes](doc/ErrorsAndFixes.md)
+1. **Clone this repository**:
+   ```bash
+   git clone https://github.com/PallaviDule/Namaste-React-VidStream.git
+   cd Namaste-React-VidStream
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. Open in browser:  
+   [http://localhost:5173](http://localhost:5173)
 
 
-### Important Links
-1. [Google API Links](https://developers.google.com/workspace/cloud-search/docs/reference/rest)
-2. [YouTube API Links](https://developers.google.com/youtube/v3/docs) - used these api to get video details.
+### 📚 What You'll Learn from This Project
 
---- 
-**⭐️ If you find this helpful or are also taking the course, feel free to star the repo and connect!**
+✅ Vite + React setup  
+✅ Tailwind CSS styling  
+✅ Debounced YouTube search suggestions  
+✅ Custom LRU Caching logic (functional!)  
+✅ Live chat with Redux state  
+✅ Component communication via props/hooks  
+✅ Real-world React architecture + patterns  
+
+### 🗂️ Learning Docs
+
+All of my personal notes and deep dives are in the `doc/` folder:
+
+1. 📦 [React + Vite Setup](doc/React+Vite.md)  
+2. 📡 [YouTube API Integration](doc/Youtube.md)  
+3. 🎨 [CSS & Tailwind Styling](doc/Styling.md)  
+4. 🧠 [LRU Caching Strategy](doc/Cache.md)  
+5. 💬 [Live Chat using Redux](doc/LiveChat.md)  
+6. 🛠️ [Errors & Fixes](doc/ErrorsAndFixes.md)
+
+
+### 🔗 API References
+
+- [Google Workspace API](https://developers.google.com/workspace/cloud-search/docs/reference/rest)
+- [YouTube Data API v3](https://developers.google.com/youtube/v3/docs)
+
+These APIs were used for fetching search suggestions and video metadata.
+
+
+### 💡 Pro Tips
+
+- Use `onMouseDown` instead of `onClick` for chat send buttons to avoid losing focus before clicks register.
+- LRU cache implementation uses a functional closure-based approach — it's light, fast, and React-friendly.
+- Debounced search prevents flooding the API and makes for smoother UX.
+
+### 🌟 Connect
+
+If you’re also taking the course or found this repo helpful, feel free to **⭐️ star** it and connect on GitHub!
+
+

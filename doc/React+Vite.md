@@ -1,21 +1,50 @@
-### React+Vite
-This project is created using [vite](https://react.dev/learn/build-a-react-app-from-scratch). This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React + Vite
 
-Currently, two official plugins are available:
+This project is built using [Vite](https://react.dev/learn/build-a-react-app-from-scratch), a modern build tool known for fast performance, instant HMR (Hot Module Replacement), and minimal config.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-- [tailwindcss](https://tailwindcss.com/docs/installation/using-vite) - we are using tailwindcss in this project. Here, you can check how you can configure tailwind with vite.
-    - it does not config file explicitly. installed [@tailwindcss/vite] and configured tailwindcss in `vite.config.cs`.
+Vite supports React via two official plugins:
+
+- [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)  
+  Uses **Babel** under the hood for Fast Refresh support.
+- [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc)  
+  Uses **[SWC](https://swc.rs/)** for much faster builds and refreshes (good for large projects).
+
+We are also using **Tailwind CSS** with Vite:  
+Documentation: [Tailwind with Vite](https://tailwindcss.com/docs/installation/using-vite)
+- Installed `@tailwindcss/vite` and configured Tailwind inside [vite.config.js](../vite.config.js).
+
+## React Router DOM
+
+We use `react-router-dom` for client-side routing. The routing setup is defined in:  
+→ [`App.jsx`](../src/App.jsx)
+
+### Key Routing Concepts in This Project:
+
+- For navigation, we use `createBrowserRouter` from React Router v6.
+- When the URL path looks like `/watch?v=xyz`, we deal with:
+  
+  - **Path params** → Accessed using `useParams()`  
+  - **Query/search params** → Accessed using [`useSearchParams`](https://reactrouter.com/6.30.0/hooks/use-search-params)
+
+-  In this project, you can see query param usage in:  
+→ [`WatchPage.jsx`](../src/component/WatchPage.jsx)
+
+    ```
+    const [searchParams] = useSearchParams(); 
+    const videoId = searchParams.get('v');
+    ```
+
+## Custom Hooks
+### Why a custom hook?
+
+Instead of writing all logic inside a component using `useEffect`, it’s cleaner and more reusable to move it into its own hook. This:
+
+- Keeps components less cluttered
+- Improves readability
+- Makes logic reusable across other components (if needed)
+
+We created the following custom hook to manage suggestions logic separately:
+
+- [`useYouTubeSuggest`](../src/utils/useYouTubeSuggest.jsx) : This hook fetches YouTube-style search suggestions with debouncing, caching, and error handling.”
 
 
-
-### React-Router-Dom
-- In this project, we are using react-router-dom for routing with [createBrowserRouter](../src/App.jsx).
-- If you see the url for the path `/watch?v={xyz}`, we also get id of the video in the url. How would you read it?
-    - We read pathParam using useParams();
-    - We read searchParam using [useSearchParams](https://reactrouter.com/6.30.0/hooks/use-search-params).
-        - In this project, in [watchPage](../src/component/WatchPage.jsx)
-
-### Custom Hooks
-- [useYouTubeSuggest](../src/utils/useYouTubeSuggest.jsx) : We created this custom hook, as we have to make a api call as well as some logic. So, it was better to move it altogether as a new hook rather than using useEffect in the same file. It might make project complicted, un-readable.

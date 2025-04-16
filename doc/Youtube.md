@@ -1,45 +1,102 @@
-### Youtube
-- Youtube provides it's api for limited free use.
-- Here we are can get youtube apis 
-    - [Videos List](https://developers.google.com/youtube/v3/docs/videos/list)
-    - You can copy that HTTP link for our use.
-- This api link need our API_KEY. How can you find it.
-    - [YouTube Api auth](https://developers.google.com/youtube/registering_an_application)
-    - Open credentials Page -> credentials(You may not see blank page here with a option to create a project)
-    - You need to `create a project`(dummy) to get credentials. 
-    - Click on `create credentials`
-    - If credentials expires, regenerate again
-- Even when I got my API keys, I was getting 403.
-    - You need to enable the project to access the api.
-    - You should get more details in error itself and also the link which redirects you to the page where you can enable the project.
-    - Try again, you should be able to get the result
-- You should get by default 5items, to load more items we have used `MaxResult=50`. 
-    - [Videos List](https://developers.google.com/youtube/v3/docs/videos/list)
-- In the api url, by default they are using US region. For indian region, I am using in region.
-- To get search suggestions, we are using `http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=iphone`
-    - We get the response in JSONP(JSON with Padding) format.It’s not JSON, it’s a function call that calls window.google.ac.h(...). 
-        - `window.google.ac.h(["query", [/* suggestions */], {...}]);`
-    - So, we can't simply extract it as `result.json();`
-    - See [here](../src/utils/useYouTubeSuggest.jsx) how we can extract.
-    ```
-        const res =  await fetch(SEARCH_SUGGESTION_URL + searchQuery); // Api call which returns response in JSONP format
-        const text = await res.text(); // Thus, we cannot parse it directly like `response.json`. So, here we are converting it to test first.
-    
-        let result;
-        // 1. Prepare an empty object with same structure Google expects
-        const fakeWindow = {
-          google: {
-            ac: {
-              h: (parsed) => {
-                result = parsed; // Capture the data here
-              }
-            }
-          }
-        };
-        // 2. Create a function with one parameter `window`
-        const func = new Function('window', text);
-        // 3. Run the function, pass in `fakeWindow` instead of real window 
-        func(fakeWindow);
-    
-        const suggestions = result[1].map(item => item[0]);
-    ```
+## YouTube API Integration
+This project fetches video data and search suggestions using the **YouTube Data API v3** and the **YouTube search suggestion API**.
+
+### 📦 YouTube Data API (v3)
+
+YouTube offers APIs for free (with a quota limit), and you can use these to:
+
+- Fetch video details
+- Search for videos
+- Get trending videos
+- And more
+
+#### Useful API Endpoints
+
+- [Videos List API](https://developers.google.com/youtube/v3/docs/videos/list)  
+  Use this to fetch a list of videos with details like title, thumbnail, views, etc.
+- [Search Suggestion API](http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=iphone)
+
+### 🔐 Getting Your API Key
+
+To access YouTube’s Data API, you’ll need an API Key.
+
+Steps to get it:
+
+1. Go to: [YouTube API Auth Guide](https://developers.google.com/youtube/registering_an_application)
+2. Open the **Credentials** page.
+3. If prompted, **create a new project** (you can name it anything).
+4. Click on **"Create Credentials"** > Select **API Key**.
+5. Copy the generated key and use it in your app.
+6. If credentials expires, regenerate again
+
+#### ⚠️ Common Issue: 403 Error
+If you get a `403` error even after adding your key:
+- You likely need to **enable the YouTube Data API** for your project.
+- The error message usually provides a direct link to enable the API.
+- Once enabled, retry your request.
+
+### 🌍 Localization (Region)
+- By default, many API calls return data tailored to the **US** region.
+- You can modify the `regionCode` parameter to fetch content specific to your location.  
+  For example, use `regionCode=IN` to get videos trending in India.
+
+### 🎯 Requesting More Items
+By default, the API returns only 5 items per call. To load more:
+
+```http
+https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&key=YOUR_API_KEY
+```
+
+- Use the `maxResults` parameter (limit is 50 per request).
+- [Videos List](https://developers.google.com/youtube/v3/docs/videos/list)
+
+## 🔍 YouTube Search Suggestion API
+
+YouTube also offers a public endpoint for showing **search suggestions**, similar to what you see in the YouTube search bar.
+
+Example URL:
+```
+http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=iphone
+```
+
+### ❗️Note: This returns **JSONP**, not standard JSON.
+
+#### Why JSONP?
+- It’s a way to serve data across domains before CORS was standard.
+- It wraps the data in a function call instead of plain JSON.
+- The response looks like:
+  ```js
+  window.google.ac.h(["iphone", [["iphone 15", 0], ["iphone 14", 0]], {...}])
+  ```
+
+### ✅ How We Handle JSONP
+- You can see this in action in:  
+  → [`useYouTubeSuggest.jsx`](../src/utils/useYouTubeSuggest.jsx)
+- Since it’s not standard JSON, we can’t use `response.json()`. 
+- Instead, we parse it like this:
+  ```js
+  const res = await fetch(SEARCH_SUGGESTION_URL + searchQuery);
+  const text = await res.text(); // We receive the response as a string
+
+  let result;
+
+  // Step 1: Mock the window.google.ac.h callback: Prepare an empty object with same structure Google expects
+  const fakeWindow = {
+    google: {
+      ac: {
+        h: (parsed) => {
+          result = parsed;
+        }
+      }
+    }
+  };
+
+  // Step 2: Create a function using the returned script text
+  const func = new Function('window', text);
+
+  // Step 3: Run the function, pass in `fakeWindow` instead of real window
+  func(fakeWindow);
+
+  // Step 4: Extract the suggestions
+  const suggestions = result[1].map(item => item[0]);
+  ```
