@@ -14,6 +14,7 @@ YouTube offers APIs for free (with a quota limit), and you can use these to:
 
 - [Videos List API](https://developers.google.com/youtube/v3/docs/videos/list)  
   Use this to fetch a list of videos with details like title, thumbnail, views, etc.
+- [Search Suggestion API](http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=iphone)
 
 ### 🔐 Getting Your API Key
 
