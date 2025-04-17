@@ -54,8 +54,3 @@ These APIs were used for fetching search suggestions and video metadata.
 - LRU cache implementation uses a functional closure-based approach — it's light, fast, and React-friendly.
 - Debounced search prevents flooding the API and makes for smoother UX.
 
-### 🌟 Connect
-
-If you’re also taking the course or found this repo helpful, feel free to **⭐️ star** it and connect on GitHub!
-
-
